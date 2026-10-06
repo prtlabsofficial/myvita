@@ -5,7 +5,7 @@ alembic==1.14.0
 psycopg[binary]==3.2.3
 pydantic==2.10.3
 pydantic[email]==2.10.3
-pydantic-settings==2.7.0
+pydantic-settings==2.15.0
 argon2-cffi==25.1.0
 pyjwt==2.15.0
 # AES-GCM encryption of staff TOTP seeds at rest (app/core/mfa.py).
