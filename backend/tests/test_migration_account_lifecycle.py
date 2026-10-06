@@ -11,6 +11,7 @@ import uuid
 
 import pytest
 from alembic import command
+from alembic.script import ScriptDirectory
 from sqlalchemy import create_engine, text
 
 from tests.conftest import TEST_DATABASE_URL, alembic_config
@@ -55,7 +56,8 @@ def test_upgrade_stops_on_case_duplicates_and_changes_nothing():
         engine.dispose()
 
     with engine.connect() as connection:
-        assert connection.execute(text("SELECT version_num FROM alembic_version")).scalar() == "f6a7b8c9d0e1"
+        head = ScriptDirectory.from_config(config).get_current_head()
+        assert connection.execute(text("SELECT version_num FROM alembic_version")).scalar() == head
         triggers = connection.execute(
             text("SELECT tgname FROM pg_trigger WHERE tgrelid = 'audit_logs'::regclass AND NOT tgisinternal")
         ).scalars().all()
