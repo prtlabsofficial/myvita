@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged:1.27-alpine
+FROM nginxinc/nginx-unprivileged:1.31-alpine
 
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY proxy_params /etc/nginx/proxy_params
